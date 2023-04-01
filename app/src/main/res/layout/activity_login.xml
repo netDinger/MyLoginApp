@@ -11,7 +11,7 @@
         android:id="@+id/appLogo"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/shadow"
+        android:src="@drawable/app_icon"
         android:layout_centerHorizontal="true"
         />
 
@@ -38,6 +38,15 @@
         android:inputType="textPassword"
         />
 
+    <TextView
+        android:id="@+id/forgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/forgotPass"
+        android:layout_below="@id/password"
+        android:layout_alignEnd="@id/password"
+        android:layout_marginTop="12dp"/>
+
 
     <Button
         android:id="@+id/loginBtn"
@@ -48,37 +57,16 @@
         android:layout_marginTop="50dp"
         android:layout_below="@id/password"/>
 
-    <RadioGroup
-        android:id="@+id/checkDeveloper"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/loginBtn">
-    <RadioButton
-        android:id="@+id/isDeveloper"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
 
-        android:text="I am Android Developer"
+   <TextView
+       android:id="@+id/signText"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="@string/signup"
+       android:layout_below="@id/loginBtn"
+       android:layout_centerHorizontal="true"
+       android:textColor="@color/design_default_color_primary"
+       android:layout_marginTop="30dp"/>
 
-        android:gravity="center_vertical"/>
-
-    <RadioButton
-        android:id="@+id/isNotDeveloper"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:text="I am not an Android Developer"
-        android:checked="true"
-        android:gravity="center_vertical"/>
-    </RadioGroup>
-
-    <CheckBox
-        android:id="@+id/agree"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="I agree to Privacy Policy"
-        android:layout_below="@id/checkDeveloper"
-        android:checked="false"
-        />
 
 </RelativeLayout>

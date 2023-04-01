@@ -24,7 +24,6 @@ public class HomeActivity extends AppCompatActivity {
 
         Bundle b = getIntent().getExtras();
        // String userName = b.getString("username");
-
     }
 
     @Override
