@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context=".profile.MainActivity"
+    android:gravity="center_vertical">
+
+    <ImageView
+        android:id="@+id/appLogo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/shadow"
+        android:layout_centerHorizontal="true"
+        />
+
+    <EditText
+        android:id="@+id/username"
+        android:hint="@string/username"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/appLogo"
+        android:layout_marginTop="20dp"
+        android:background="#ffeaeaea"
+        />
+
+    <EditText
+        android:id="@+id/password"
+        android:hint="@string/password"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/username"
+        android:background="#eaeaea"
+        android:layout_marginTop="10dp"
+        android:inputType="textPassword"
+        />
+
+
+    <Button
+        android:id="@+id/loginBtn"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:text="@string/login"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:layout_below="@id/password"/>
+
+    <RadioGroup
+        android:id="@+id/checkDeveloper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/loginBtn">
+    <RadioButton
+        android:id="@+id/isDeveloper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:text="I am Android Developer"
+
+        android:gravity="center_vertical"/>
+
+    <RadioButton
+        android:id="@+id/isNotDeveloper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:text="I am not an Android Developer"
+        android:checked="true"
+        android:gravity="center_vertical"/>
+    </RadioGroup>
+
+    <CheckBox
+        android:id="@+id/agree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="I agree to Privacy Policy"
+        android:layout_below="@id/checkDeveloper"
+        android:checked="false"
+        />
+
+</RelativeLayout>
