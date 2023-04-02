@@ -1,26 +1,28 @@
-package com.example.myapp.profile;
+package com.example.myapp.profile.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
-import android.webkit.WebView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.Spinner;
 
 import com.example.myapp.R;
+import com.example.myapp.profile.model.ChatModel;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity {
 
     private static final String TAG = "HomeActivity";
     private ListView listView;
+    private Spinner chooseFoodType;
     private ArrayList<String> foods ;
+    private String[] foodTypes = {"Drinks","Fast Foods","Snacks","Coffee"};
+
+    private ArrayList<ChatModel> chatList = new ArrayList<>();
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -59,18 +61,30 @@ public class HomeActivity extends AppCompatActivity {
         foods.add("Salad");
         foods.add("Rice");
         foods.add("Ramen");
+
+        //MVP -> Model,view,presenter
+        //MVVM -> Model,View, ViewModel
+
+        chatList.add(new ChatModel("User1","hello"));
+        chatList.add(new ChatModel("User2","Hi"));
+
         initViews();
     }
 
     private void initViews(){
         listView = findViewById(R.id.listView);
+        chooseFoodType = findViewById(R.id.chooseFoodType);
+
+        //Creating and attaching adapter to listView
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,foods);
         arrayAdapter.notifyDataSetChanged();
-
         listView.setAdapter(arrayAdapter);
+
+        //Creating and attaching adapter to spinner(ChooseFoodType)
+        ArrayAdapter<String> chooseFoodAdapter = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,foodTypes);
+        //chooseFoodAdapter.setDropDownViewResource(com.google.android.material.R.layout.support_simple_spinner_dropdown_item);
+        chooseFoodType.setAdapter(chooseFoodAdapter);
     }
-
-
 
     @Override
     protected void onStart() {

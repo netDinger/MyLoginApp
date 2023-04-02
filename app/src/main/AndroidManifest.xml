@@ -17,21 +17,21 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="33">
         <activity
-            android:name=".RatingActivity"
+            android:name=".profile.view.RatingActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".profile.HomeActivity"
+            android:name=".profile.view.HomeActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".profile.MainActivity"
+            android:name=".profile.view.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

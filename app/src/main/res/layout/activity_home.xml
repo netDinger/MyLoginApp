@@ -4,13 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".profile.HomeActivity">
+    tools:context=".profile.view.HomeActivity">
+
+    <Spinner
+        android:id="@+id/chooseFoodType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="7dp"/>
 
     <ListView
         android:id="@+id/listView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:listitem="@layout/list_item"
+        android:background="#EDE9E9"
         />
 
 </LinearLayout>

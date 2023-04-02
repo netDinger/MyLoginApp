@@ -1,4 +1,4 @@
-package com.example.myapp.profile;
+package com.example.myapp.profile.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
