@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText password;
     private ImageView app_logo;
     private ImageButton imgBtn;
+    private Boolean isUserTyping = false;
 
     private static final String TAG = "afsa";
 
@@ -52,6 +55,26 @@ public class MainActivity extends AppCompatActivity {
             public void onFocusChange(View v, boolean hasFocus) {
                 if(hasFocus)
                     Toast.makeText(MainActivity.this, "UserName", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        userName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                isUserTyping = true;
+                //sendTypingStatusToServer();
+                Toast.makeText(MainActivity.this, s.toString(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                isUserTyping = false;
             }
         });
 
