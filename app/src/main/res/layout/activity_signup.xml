@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    tools:context=".profile.view.LoginActivity"
+    tools:context=".profile.view.Signup"
     android:gravity="center_vertical">
 
     <ImageView
@@ -14,6 +13,15 @@
         android:src="@drawable/app_icon"
         android:layout_centerHorizontal="true"
         />
+    <TextView
+        android:id="@+id/register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_below="@id/appLogo"
+        android:text="Register User"/>
 
     <EditText
         android:id="@+id/username"
@@ -21,7 +29,7 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/appLogo"
+        android:layout_below="@id/register"
         android:layout_marginTop="20dp"
         android:background="#ffeaeaea"
         />
@@ -38,35 +46,19 @@
         android:inputType="textPassword"
         />
 
-    <TextView
-        android:id="@+id/forgotPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/forgotPass"
-        android:layout_below="@id/password"
-        android:layout_alignEnd="@id/password"
-        android:layout_marginTop="12dp"/>
+    <!-- Add Gender Selection -->
 
 
     <Button
-        android:id="@+id/loginBtn"
+        android:id="@+id/signupBtn"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:text="@string/login"
+        android:text="@string/signup"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         android:layout_below="@id/password"/>
 
 
-   <TextView
-       android:id="@+id/signup"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:text="@string/signup"
-       android:layout_below="@id/loginBtn"
-       android:layout_centerHorizontal="true"
-       android:textColor="@color/design_default_color_primary"
-       android:layout_marginTop="30dp"/>
 
 
 </RelativeLayout>

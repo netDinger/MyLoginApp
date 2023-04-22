@@ -4,18 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapp.R;
+import com.example.myapp.profile.util.DefaultConfig;
 
 
 /**
@@ -24,9 +25,10 @@ import com.example.myapp.R;
  *
  *
  */
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     private Button loginBtn;
+     private TextView signupBtn;
     private EditText userName;
     private EditText password;
     private ImageView app_logo;
@@ -42,81 +44,43 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        SharedPreferences preferences = getSharedPreferences(DefaultConfig.UserPref,MODE_PRIVATE);
 
         loginBtn = findViewById(R.id.loginBtn);
+        signupBtn = findViewById(R.id.signup);
         userName = findViewById(R.id.username);
         password = findViewById(R.id.password);
         app_logo = findViewById(R.id.appLogo);
-
-
-
-        userName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus)
-                    Toast.makeText(MainActivity.this, "UserName", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-        userName.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                isUserTyping = true;
-                //sendTypingStatusToServer();
-                Toast.makeText(MainActivity.this, s.toString(), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                isUserTyping = false;
-            }
-        });
-
 
         //implicit intent = occur outside of the application
         //explicit intent = occur inside my application
 
 
+        signupBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                 startActivity(new Intent(LoginActivity.this,Signup.class));
+            }
+        });
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Bundle  b = new Bundle();
-//                b.putString("username",userName.getText().toString());
-               // Log.d(TAG,b.getString("username"));
-                Intent i = new Intent();
-                i.setClass(MainActivity.this, HomeActivity.class);
-                //i.putExtras(b);
-                startActivity(i);
 
-
-
-                //check if password == "password"
-                if(userName.getText().toString().equals("android") ) {
-
+                //check if password == getPassword()
+                if(userName.getText().toString().equals(preferences.getString(DefaultConfig.UserNameKey,"#user1291248!@!*@")) ) {
+                    Toast.makeText(LoginActivity.this, "Login Success!", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(LoginActivity.this,HomeActivity.class));
                 }else{
-                   Toast.makeText(MainActivity.this,
-                                   userName.getText().toString(),
+                   Toast.makeText(LoginActivity.this,
+                                   userName.getText().toString() + "is Wrong User!",
                                    Toast.LENGTH_SHORT)
                            .show();
                 }
             }
         });
         
-        app_logo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Clicked!", Toast.LENGTH_SHORT).show();
 
-
-            }
-        });
     }
 
 
