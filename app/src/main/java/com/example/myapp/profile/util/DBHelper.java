@@ -23,6 +23,7 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE "+TABLE_NAME+" (Name Text,PhoneNo Text)");
+
     }
 
     @Override
@@ -30,3 +31,5 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 }
+
+//DAO -> Data Access Object

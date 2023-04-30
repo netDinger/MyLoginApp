@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.myapp.R;
 import com.example.myapp.profile.util.DefaultConfig;
+import com.google.firebase.FirebaseApp;
 
 
 /**
@@ -41,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        FirebaseApp.initializeApp(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -70,7 +72,9 @@ public class LoginActivity extends AppCompatActivity {
                 //check if password == getPassword()
                 if(userName.getText().toString().equals(preferences.getString(DefaultConfig.UserNameKey,"#user1291248!@!*@")) ) {
                     Toast.makeText(LoginActivity.this, "Login Success!", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(LoginActivity.this,HomeActivity.class));
+                    Intent i = new Intent();
+                    i.setClass(LoginActivity.this,HomeActivity.class);
+                    startActivity(i);
                 }else{
                    Toast.makeText(LoginActivity.this,
                                    userName.getText().toString() + "is Wrong User!",

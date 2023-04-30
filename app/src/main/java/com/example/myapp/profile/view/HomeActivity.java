@@ -3,6 +3,7 @@ package com.example.myapp.profile.view;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import com.example.myapp.R;
 import com.example.myapp.profile.model.ChatModel;
 import com.example.myapp.profile.util.DBHelper;
+import com.example.myapp.profile.util.MyContentProvider;
 
 import java.util.ArrayList;
 
@@ -46,31 +48,29 @@ public class HomeActivity extends AppCompatActivity {
         //MVVM -> Model,View, ViewModel
 
         initViews();
-        readContacts();
+        //readContacts();
+       readContactsFromCP();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        contacts = new ArrayList<>();
-        arrayAdapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, contacts);
 
-        readContacts();
+
         Log.e(TAG,"on resume");
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        contacts = new ArrayList<>();
-        Log.e(TAG,"on restart");
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        contacts = new ArrayList<>();
-        Log.e(TAG,"on start");
+
+
     }
 
     private void initViews(){
@@ -87,15 +87,16 @@ public class HomeActivity extends AppCompatActivity {
 
         //Creating and attaching adapter to listView
        arrayAdapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, contacts);
-        arrayAdapter.notifyDataSetChanged();
+
         listView.setAdapter(arrayAdapter);
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                deleteContacts(contacts.get(position));
+                //deleteContacts(contacts.get(position));
                 return false;
             }
         });
+
 
         //Creating and attaching adapter to spinner(ChooseFoodType)
         ArrayAdapter<String> chooseFoodAdapter = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,foodTypes);
@@ -112,14 +113,15 @@ public class HomeActivity extends AppCompatActivity {
             SQLiteDatabase database = dbHelper.getReadableDatabase();
             Cursor cursor = database.query(DBHelper.TABLE_NAME, null, null, null, null, null, null);
             while (cursor.moveToNext()){
+
                 contacts.add(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.COLUMN_NAME)));
                 //cursor.moveToNext();
             }
-            arrayAdapter.notifyDataSetChanged();
 
-            if (!cursor.isClosed()) {
-                cursor.close();
-            }
+        if (!cursor.isClosed()) {
+            cursor.close();
+        }
+        readContactsFromCP();
 
 //        }catch (Exception e){
 //            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -135,5 +137,42 @@ public class HomeActivity extends AppCompatActivity {
             Toast.makeText(this,e.getMessage(),Toast.LENGTH_SHORT).show();
         }
     }
+
+
+    private void readContactsFromCP(){
+//        ContentResolver contentResolver = getContentResolver();
+//        Cursor cursor = contentResolver.query(MyContentProvider.CONTACT_URI,null,null,null,null);
+//        if(cursor != null) {
+//            while (cursor.moveToNext()) {
+//                String contact = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.COLUMN_NAME));
+//                Log.e(TAG, contact);
+//            }
+//            if (!cursor.isClosed())
+//                cursor.close();
+//        }
+        MyContentProvider provider = new MyContentProvider(this);
+        Cursor c = provider.query(MyContentProvider.CONTACT_URI,null,null,null,null);
+        while (c.moveToNext()){
+            Log.e(TAG,"data");
+            contacts.add(c.getString(c.getColumnIndexOrThrow(DBHelper.COLUMN_NAME)));
+        }
+
+
+        if (!c.isClosed())
+            c.close();
+
+    }
 }
+
+
+//4 application components ---->>>>
+//activity lifecycle
+//adb commands
+//Log (w,d,i,v,e)
+//Practice questions
+//URI -> Uniform Resource Identifier (content://)
+
+
+
+
 

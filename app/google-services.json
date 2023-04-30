@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "165677610188",
+    "project_id": "cloudcontacts-fe179",
+    "storage_bucket": "cloudcontacts-fe179.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:165677610188:android:1f2ca80c43453f4a147e69",
+        "android_client_info": {
+          "package_name": "com.example.myapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "165677610188-nldfoir4g2f5o164fhl1fgmpo2r1uda1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.myapp",
+            "certificate_hash": "8eb69750aa84a043229aef4124911e021a8168e5"
+          }
+        },
+        {
+          "client_id": "165677610188-7b8jqtpds24aaama6rkepntpkhomoi5e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgofQG2DlhIA8Q20HsE7Q0zOq641DVDzU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "165677610188-7b8jqtpds24aaama6rkepntpkhomoi5e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

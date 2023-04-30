@@ -12,9 +12,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapp.R;
+import com.example.myapp.profile.contract.SignupContract;
+import com.example.myapp.profile.presenter.SignupPresenter;
 import com.example.myapp.profile.util.DefaultConfig;
+import com.google.firebase.FirebaseApp;
 
-public class Signup extends AppCompatActivity {
+public class Signup extends AppCompatActivity implements SignupContract.View {
 
 
     int saveMode = Activity.MODE_PRIVATE;
@@ -23,11 +26,15 @@ public class Signup extends AppCompatActivity {
     private EditText userName;
     private EditText password;
 
+    private SignupContract.Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_signup);
+        presenter = new SignupPresenter();
+        presenter.setView(this);
 
         SharedPreferences sharedPreferences = getSharedPreferences(DefaultConfig.UserPref,saveMode);
         SharedPreferences.Editor prefEditor = sharedPreferences.edit();
@@ -39,14 +46,29 @@ public class Signup extends AppCompatActivity {
         signupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                presenter.onSignup(userName.getText().toString(),
+                        password.getText().toString());
 
-                prefEditor.putString(DefaultConfig.UserNameKey,userName.getText().toString());
-                prefEditor.putString(DefaultConfig.PasswordKey,password.getText().toString());
-                prefEditor.apply();
-                startActivity(new Intent(Signup.this, LoginActivity.class));
-                Toast.makeText(Signup.this, "Success!!!", Toast.LENGTH_SHORT).show();
-            }
+                Toast.makeText(Signup.this, "Signing Up!!!", Toast.LENGTH_SHORT).show();
+//                prefEditor.putString(DefaultConfig.UserNameKey,userName.getText().toString());
+//                prefEditor.putString(DefaultConfig.PasswordKey,password.getText().toString());
+//                prefEditor.apply();
+               // startActivity(new Intent(Signup.this, LoginActivity.class));
+               }
         });
+    }
+
+
+    @Override
+    public void onSignupSuccess() {
+        Intent i = new Intent();
+        i.setClass(this,HomeActivity.class);
+        startActivity(i);
+    }
+
+    @Override
+    public void onSignupFailure() {
+        Toast.makeText(this, "Signup Fail!!!", Toast.LENGTH_SHORT).show();
     }
 
 
