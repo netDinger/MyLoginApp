@@ -33,6 +33,7 @@ public class Signup extends AppCompatActivity implements SignupContract.View {
         super.onCreate(savedInstanceState);
         FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_signup);
+
         presenter = new SignupPresenter();
         presenter.setView(this);
 
