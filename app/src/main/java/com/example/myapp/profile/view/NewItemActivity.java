@@ -216,17 +216,15 @@ public class NewItemActivity extends AppCompatActivity {
 
     private String readInternalStorage() {
         try {
-
             FileInputStream inputStream = openFileInput(MY_FILENAME);
-
             byte[] reader = new byte[inputStream.available()];
 
             if(inputStream.read(reader) != -1){
                 String myData = new String(reader);
                 return myData;
             }
-
             inputStream.close();
+
         } catch (IOException e) {
             e.printStackTrace();
         }

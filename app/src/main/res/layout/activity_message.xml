@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".profile.view.MessageActivity"
+    android:gravity="center">
+
+    <Button
+        android:id="@+id/startService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="30dp"
+        android:paddingVertical="10dp"
+        android:text="Start Service"/>
+
+    <Button
+        android:id="@+id/stopService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/startService"
+        android:paddingHorizontal="30dp"
+        android:layout_alignStart="@id/startService"
+        android:layout_alignEnd="@id/startService"
+        android:paddingVertical="10dp"
+        android:text="Stop Service"
+        />
+
+
+    <Button
+        android:id="@+id/broadcast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/stopService"
+        android:paddingHorizontal="30dp"
+        android:layout_alignStart="@id/startService"
+        android:layout_alignEnd="@id/startService"
+        android:paddingVertical="10dp"
+        android:text="BroadCast"
+        />
+
+
+
+</RelativeLayout>

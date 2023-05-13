@@ -80,7 +80,7 @@ public class HomeActivity extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this,NewItemActivity.class));
+                startActivity(new Intent(HomeActivity.this,MessageActivity.class));
             }
         });
 
