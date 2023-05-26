@@ -4,7 +4,7 @@ public interface SignupContract {
     interface View{
         void onSignupSuccess();
         void onSignupFailure();
-
+        void showLoading(String title,String msg);
     }
 
     interface Presenter{
@@ -15,3 +15,4 @@ public interface SignupContract {
 }
 
 //MVP -> Model View Presenter
+

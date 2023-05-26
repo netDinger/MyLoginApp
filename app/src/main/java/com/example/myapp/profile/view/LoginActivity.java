@@ -1,12 +1,20 @@
 package com.example.myapp.profile.view;
 
+import static android.view.Gravity.CENTER_VERTICAL;
+
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,7 +25,11 @@ import android.widget.Toast;
 
 import com.example.myapp.R;
 import com.example.myapp.profile.util.DefaultConfig;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 /**
@@ -35,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
     private ImageView app_logo;
     private ImageButton imgBtn;
     private Boolean isUserTyping = false;
+    private final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
     private static final String TAG = "afsa";
 
@@ -43,10 +56,14 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         FirebaseApp.initializeApp(this);
+
+        if (firebaseAuth.getCurrentUser() != null){
+            startActivity(new Intent(LoginActivity.this,HomeActivity.class));
+            finish();
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        SharedPreferences preferences = getSharedPreferences(DefaultConfig.UserPref,MODE_PRIVATE);
 
         loginBtn = findViewById(R.id.loginBtn);
         signupBtn = findViewById(R.id.signup);
@@ -54,34 +71,16 @@ public class LoginActivity extends AppCompatActivity {
         password = findViewById(R.id.password);
         app_logo = findViewById(R.id.appLogo);
 
-        //implicit intent = occur outside of the application
-        //explicit intent = occur inside my application
+        signupBtn.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this,Signup.class)));
 
+        loginBtn.setOnClickListener(v -> {
 
-        signupBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                 startActivity(new Intent(LoginActivity.this,Signup.class));
-            }
-        });
-
-        loginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                //check if password == getPassword()
-                if(userName.getText().toString().equals(preferences.getString(DefaultConfig.UserNameKey,"#user1291248!@!*@")) ) {
-                    Toast.makeText(LoginActivity.this, "Login Success!", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent();
-                    i.setClass(LoginActivity.this,HomeActivity.class);
-                    startActivity(i);
-                }else{
-                   Toast.makeText(LoginActivity.this,
-                                   userName.getText().toString() + "is Wrong User!",
-                                   Toast.LENGTH_SHORT)
-                           .show();
-                }
-            }
+            firebaseAuth.signInWithEmailAndPassword(userName.getText().toString(),password.getText().toString())
+                    .addOnSuccessListener(authResult ->
+                            startActivity(new Intent(LoginActivity.this,HomeActivity.class)))
+                    .addOnFailureListener(e ->
+                            Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show());
+//
         });
         
 

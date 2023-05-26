@@ -5,34 +5,66 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".profile.view.HomeActivity">
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <androidx.appcompat.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/add"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="end"
-                android:paddingEnd="10dp"
-                android:src="@drawable/ic_baseline_add_circle_24"/>
-        </androidx.appcompat.widget.Toolbar>
-    </com.google.android.material.appbar.AppBarLayout>
 
-    <Spinner
-        android:id="@+id/chooseFoodType"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingVertical="7dp"/>
+    <TabHost
+       android:id="@android:id/tabhost"
+       android:layout_width="wrap_content"
+       android:layout_height="match_parent">
+       <RelativeLayout
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content">
 
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:listitem="@layout/list_item"
-        android:background="#EDE9E9"
-        />
+
+      <TabWidget
+          android:id="@android:id/tabs"
+          android:layout_width="match_parent"
+          android:layout_height="?android:attr/actionBarSize"
+         />
+
+       <FrameLayout
+           android:id="@android:id/tabcontent"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:layout_below="@android:id/tabs"
+           >
+          <include android:id="@+id/firstView"
+              layout="@layout/first_tab"/>
+
+           <RelativeLayout
+               android:id="@+id/secondView"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent">
+
+
+               <Button
+                   android:id="@+id/showMenu"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="shoW mEnu"
+                   android:textAllCaps="false"/>
+
+               <Button
+                   android:id="@+id/showPopUp"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="shoW PopUp"
+                   android:layout_below="@id/showMenu"
+                   android:textAllCaps="false"/>
+               <Button
+                   android:id="@+id/showDialog"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_below="@id/showPopUp"
+                   android:text="Show Dialog"
+                   />
+
+           </RelativeLayout>
+       </FrameLayout>
+       </RelativeLayout>
+
+
+   </TabHost>
+
+
 
 </LinearLayout>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="PPKText">
+        <item name="android:textColor">#D5A006</item>
+        <item name="android:textStyle">bold|italic</item>
+        <item name="android:padding">50dp</item>
+
+    </style>
+</resources>
