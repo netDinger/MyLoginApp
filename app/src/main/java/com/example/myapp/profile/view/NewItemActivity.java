@@ -3,8 +3,10 @@ package com.example.myapp.profile.view;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Environment;
@@ -42,6 +44,7 @@ public class NewItemActivity extends AppCompatActivity {
 
     private static final String TAG = "NewItemActivity";
     private String MY_FILENAME = "MYNewData.txt";
+    //data/data/<PackageName>/files
 
     private EditText name, phoneNumber;
     private TextView msg;
@@ -58,6 +61,8 @@ public class NewItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //data/data/<packageName>/databases/Contacts.db
+        //android/content/SharedPref
 
         setContentView(R.layout.activity_new_item);
 
@@ -69,17 +74,14 @@ public class NewItemActivity extends AppCompatActivity {
         msg = findViewById(R.id.msg);
 
         save = findViewById(R.id.save);
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (name.getText().toString().equals("") || phoneNumber.getText().toString().equals("")) {
-                    Toast.makeText(NewItemActivity.this, "Contact shouldn't be empty", Toast.LENGTH_SHORT).show();
-                } else {
-                    //saveContact();
-                    saveToCP();
+        save.setOnClickListener(v -> {
+            if (name.getText().toString().equals("") || phoneNumber.getText().toString().equals("")) {
+                Toast.makeText(NewItemActivity.this, "Contact shouldn't be empty", Toast.LENGTH_SHORT).show();
+            } else {
+                saveContact();
+               // saveToCP();
 
-                    Toast.makeText(NewItemActivity.this, readInternalStorage(), Toast.LENGTH_SHORT).show();
-                }
+                //Toast.makeText(NewItemActivity.this, readInternalStorage(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -280,6 +282,29 @@ public class NewItemActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return "";
+    }
+
+
+    private void readFromDB(){
+        try{
+            String[] cols;
+            Context context = createPackageContext("com.example.myappdb.sharedID",Context.CONTEXT_IGNORE_SECURITY);
+            File myFile = context.getDatabasePath(DBHelper.DATABASE_NAME);
+            if (myFile.exists()){
+                database = openOrCreateDatabase(myFile.getPath(),MODE_PRIVATE,null);
+            }
+
+            Cursor cursor = database.rawQuery("SELECT * FROM contacts;",null);
+            cursor.moveToFirst();
+            int colCount = cursor.getColumnCount();
+            cols = new String[colCount];
+            for (int i =0; i<colCount; i++){
+                cols[i] = cursor.getString(i);
+            }
+            cursor.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 }

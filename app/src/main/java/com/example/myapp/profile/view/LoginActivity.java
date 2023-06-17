@@ -1,20 +1,16 @@
 package com.example.myapp.profile.view;
 
-import static android.view.Gravity.CENTER_VERTICAL;
-
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Path;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,12 +19,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.myapp.R;
-import com.example.myapp.profile.util.DefaultConfig;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 
@@ -38,7 +33,8 @@ import com.google.firebase.auth.FirebaseAuth;
  *
  *
  */
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity
+{
 
     private Button loginBtn;
      private TextView signupBtn;
@@ -58,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
         FirebaseApp.initializeApp(this);
 
         if (firebaseAuth.getCurrentUser() != null){
-            startActivity(new Intent(LoginActivity.this,HomeActivity.class));
+            startActivity(new Intent(LoginActivity.this,NewItemActivity.class));
             finish();
         }
 
@@ -77,12 +73,12 @@ public class LoginActivity extends AppCompatActivity {
 
             firebaseAuth.signInWithEmailAndPassword(userName.getText().toString(),password.getText().toString())
                     .addOnSuccessListener(authResult ->
-                            startActivity(new Intent(LoginActivity.this,HomeActivity.class)))
+                            startActivity(new Intent(LoginActivity.this,NewItemActivity.class)))
                     .addOnFailureListener(e ->
                             Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show());
 //
         });
-        
+
 
     }
 

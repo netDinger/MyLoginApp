@@ -9,6 +9,7 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -75,8 +76,9 @@ public class Signup extends AppCompatActivity implements SignupContract.View {
                     password.getText().toString());
 
           });
+        SharedPreferences sharedPreferences = getSharedPreferences("PREF",MODE_PRIVATE);
 
-
+        SharedPreferences sharedPreference = getPreferences(MODE_PRIVATE);
 
         onDateSetListener = (view, year, month, dayOfMonth) -> {
 
@@ -108,7 +110,7 @@ public class Signup extends AppCompatActivity implements SignupContract.View {
         dialog.hide();
         Toast.makeText(this, "Signup Success!", Toast.LENGTH_SHORT).show();
         Intent i = new Intent();
-        i.setClass(this,HomeActivity.class);
+        i.setClass(this, MessageActivity.class);
         startActivity(i);
     }
 

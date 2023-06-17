@@ -3,11 +3,14 @@ package com.example.myapp.profile.model;
 public class ChatModel {
 
     private String name;
-    private String lastMsg;
+    private String message;
+    private String date;
 
-    public ChatModel(String name, String lastMsg){
+
+    public ChatModel(String name, String message, String date) {
         this.name = name;
-        this.lastMsg = lastMsg;
+        this.message = message;
+        this.date = date;
     }
 
     public String getName() {
@@ -18,14 +21,21 @@ public class ChatModel {
         this.name = name;
     }
 
-    public String getLastMsg() {
-        return lastMsg;
+    public String getMessage() {
+        return message;
     }
 
-    public void setLastMsg(String lastMsg) {
-        this.lastMsg = lastMsg;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 }
 
 

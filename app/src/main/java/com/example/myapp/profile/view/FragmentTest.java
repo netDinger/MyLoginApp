@@ -22,16 +22,16 @@ public class FragmentTest extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
 
-        initView();
+       // initView();
 
     }
 
     private  void initView(){
-        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
-        mapFragment.getMapAsync(googleMap -> {
-            googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-            googleMap.addMarker(new MarkerOptions().position(new LatLng(43.1, -87.9)));
-            googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(43.1, -87.9)));
-        });
+//        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
+//        mapFragment.getMapAsync(googleMap -> {
+//            googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+//            googleMap.addMarker(new MarkerOptions().position(new LatLng(43.1, -87.9)));
+//            googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(43.1, -87.9)));
+//        });
     }
 }

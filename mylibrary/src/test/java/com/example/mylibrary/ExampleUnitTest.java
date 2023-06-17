@@ -1,4 +1,4 @@
-package com.example.myapp;
+package com.example.mylibrary;
 
 import org.junit.Test;
 
@@ -13,13 +13,5 @@ public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
-    }
-
-    @Test
-    public void TestMultiply(){
-        int i = 5;
-        int j = 4;
-        assertEquals(i*j,20);
-
     }
 }
